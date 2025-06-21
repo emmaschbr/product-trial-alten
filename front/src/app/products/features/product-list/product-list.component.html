@@ -14,8 +14,8 @@
         <div>{{ product.code }}</div>
         <div>
           <i class="pi" [ngClass]="{
-          'pi-check-circle text-success': product.inventoryStatus === EnumInventoryStatus.OUTOFSTOCK,
-          'pi-exclamation-triangle text-warning': product.invotoryStatus === EnumInventoryStatus.LOWSTOCK,
+          'pi-check-circle text-success': product.inventoryStatus === EnumInventoryStatus.INSTOCK,
+          'pi-exclamation-triangle text-warning': product.inventoryStatus === EnumInventoryStatus.LOWSTOCK,
           'pi-times-circle text-danger': product.inventoryStatus === EnumInventoryStatus.OUTOFSTOCK
           }"></i>
         </div>
