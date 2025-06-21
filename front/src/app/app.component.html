@@ -8,7 +8,12 @@
     {{ title }}
   </div>
   <div class="p-toolbar-group-end">
-    <p-button icon="pi pi-shopping-cart" (onClick)="openCart()"></p-button>
+    <p-button
+      icon="pi pi-shopping-cart"
+      [badge]="countCartItems.toString()"
+      [text]="true"
+      (onClick)="openCart()">
+    </p-button>
   </div>
 </p-toolbar>
 <p-splitter

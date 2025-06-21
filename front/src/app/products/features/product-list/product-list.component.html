@@ -15,7 +15,7 @@
         <div>
           <i class="pi" [ngClass]="{
           'pi-check-circle text-success': product.inventoryStatus === EnumInventoryStatus.OUTOFSTOCK,
-          'pi-exclamation-circle text-warning': product.invotoryStatus === EnumInventoryStatus.LOWSTOCK,
+          'pi-exclamation-triangle text-warning': product.invotoryStatus === EnumInventoryStatus.LOWSTOCK,
           'pi-times-circle text-danger': product.inventoryStatus === EnumInventoryStatus.OUTOFSTOCK
           }"></i>
         </div>
@@ -28,7 +28,7 @@
             <p-button
               label="Ajouter au panier"
               (onClick)="addToCart(product)"
-              [disabled]="product.inventoruStatus === EnumInventoryStatus.OUTOFSTOCK">
+              [disabled]="product.inventoryStatus === EnumInventoryStatus.OUTOFSTOCK">
             </p-button>
             <p-button label="Modifier" severity="secondary" (onClick)="onUpdate(product)"/>
             <p-button label="Supprimer" severity="danger" (onClick)="onDelete(product)"/>
