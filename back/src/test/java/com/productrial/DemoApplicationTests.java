@@ -1,4 +1,4 @@
-package com.productrial.demo;
+package com.productrial;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
