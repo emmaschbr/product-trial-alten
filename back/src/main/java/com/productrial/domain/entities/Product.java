@@ -5,8 +5,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
-@Table(name = "PRODUCT")
+@Table(name = "product")
 @Getter
 @Setter
 public class Product extends BaseProductTrial {
@@ -23,7 +25,7 @@ public class Product extends BaseProductTrial {
     private String name;
 
     @Column(name = "description", nullable = false)
-    private String descrption;
+    private String description;
 
     @Column(name = "image", nullable = false)
     private String image;
@@ -32,7 +34,7 @@ public class Product extends BaseProductTrial {
     private String category;
 
     @Column(name = "price", nullable = false)
-    private Integer price;
+    private Double price;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
@@ -43,9 +45,21 @@ public class Product extends BaseProductTrial {
     @Column(name = "shellId", nullable = false)
     private Integer shellId;
 
-    @Column(name = "inventoryStatus", nullable = false)
+    @Enumerated(EnumType.STRING)
     private InventoryStatus inventoryStatus;
 
     @Column(name = "rating", nullable = false)
     private Integer rating;
+
+    @PrePersist
+    protected void onCreate() {
+        LocalDateTime now = LocalDateTime.now();
+        this.setCreatedAt(now);
+        this.setUpdatedAt(now);
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.setUpdatedAt(LocalDateTime.now());
+    }
 }

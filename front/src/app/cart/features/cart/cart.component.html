@@ -1,0 +1,36 @@
+@if (cart().items.length > 0) {
+  <p-table [value]="cart().items">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Produit</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+        <th>Total</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.product.price | currency:'EUR' }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.product.price * item.quantity | currency:'EUR' }}</td>
+        <td>
+          <p-button icon="pi pi-trash"
+                    severity="danger"
+                    (onClick)="removeItem(item.product.id)"/>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <tr>
+        <td colspan="3">Total</td>
+        <td colspan="2">{{ cart().total | currency:'EUR' }}</td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+} @else {
+  <div>{{ 'Aucun produit dans votre panier' }}</div>
+}

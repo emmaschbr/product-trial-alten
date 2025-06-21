@@ -1,18 +1,20 @@
 package com.productrial.domain.entities;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@MappedSuperclass
 public class BaseProductTrial {
     @Column(name = "createdAt", nullable = false)
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "updatedAt", nullable = false)
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
 }
