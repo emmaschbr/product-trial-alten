@@ -8,3 +8,9 @@ INSERT INTO product (code, name, description, image, category, price, quantity, 
                      rating, created_at, updated_at)
 VALUES ('P002', 'Smartphone', 'Latest smartphone', 'phone.jpg', 'Electronics', 699.99, 15, 'REF002', 2, 'INSTOCK', 4,
         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO message (email, message, created_at, updated_at)
+VALUES ('test@test.tt', 'Hello contact nedded', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO utilisateur (username, firstname, email, password, created_at, updated_at)
+VALUES ('admin', 'thierry', 'admin@admin.com', '$2a$10$200Z6ZZ0OnSd', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

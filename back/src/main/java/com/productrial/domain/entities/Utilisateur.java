@@ -1,27 +1,35 @@
 package com.productrial.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "message")
+@Table(name = "utilisateur")
 @Getter
 @Setter
-public class Message extends BaseProductTrial {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Utilisateur extends BaseProductTrial {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "email", nullable = false)
+    @Column(unique = true, name = "username", nullable = false)
+    private String username;
+
+    @Column(name = "firstname", nullable = false)
+    private String firstname;
+
+    @Column(unique = true, name = "email", nullable = false)
     private String email;
 
-    @Column(name = "message", nullable = false)
-    private String message;
+    @Column(name = "password", nullable = false)
+    private String password;
+
 
     @PrePersist
     protected void onCreate() {

@@ -18,7 +18,8 @@ import {DialogModule} from "primeng/dialog";
 })
 export class AppComponent {
   private readonly _cartService = inject(CartService);
-  showCartDialog = false;
+  showCartDialog: boolean = false;
+  showFavDialog: boolean = false;
   title = "ALTEN SHOP";
 
   get countCartItems() {
@@ -31,5 +32,13 @@ export class AppComponent {
 
   closeCart(): void {
     this.showCartDialog = false;
+  }
+
+  openFav(): void {
+    this.showFavDialog = true;
+  }
+
+  closeFav(): void {
+    this.showFavDialog = false;
   }
 }
