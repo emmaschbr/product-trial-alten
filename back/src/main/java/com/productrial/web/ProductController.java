@@ -2,10 +2,12 @@ package com.productrial.web;
 
 import com.productrial.business.dtos.ProductDTO;
 import com.productrial.business.services.ProductService;
+import com.productrial.business.services.UtilisateurService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.BadRequestException;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ import java.util.List;
 public class ProductController extends ExceptionController {
 
     private ProductService productService;
+    private UtilisateurService utilisateurService;
 
     @GetMapping(value = "/products", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Récupère tous les produits")
@@ -36,28 +39,31 @@ public class ProductController extends ExceptionController {
 
     @PostMapping(value = "/products")
     @Operation(summary = "Création d'un produit")
-    public ResponseEntity<Void> createProduct(@RequestBody ProductDTO productDTO, HttpServletRequest request)
+    public ResponseEntity<Void> createProduct(@RequestBody ProductDTO productDTO, HttpServletRequest request, Authentication authentication)
             throws URISyntaxException {
         //TODO: make create and edit dtos ?
+        utilisateurService.hasAdminPrivileve(authentication);
         Integer idCreated = productService.createOrUpdateProduct(null, productDTO);
         return ResponseEntity.created(new URI(request.getRequestURI() + "/" + idCreated)).build();
     }
 
     @PatchMapping(value = "/products/{productId}")
     @Operation(summary = "Modification d'un produit selon son id")
-    public ResponseEntity<Void> UpdateProduct(@PathVariable Integer productId,
-                                                @RequestBody ProductDTO productDTO) {
+    public ResponseEntity<Void> updateProduct(@PathVariable Integer productId,
+                                              @RequestBody ProductDTO productDTO,
+                                              Authentication authentication) {
+        utilisateurService.hasAdminPrivileve(authentication);
         productService.createOrUpdateProduct(productId, productDTO);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(value = "/products/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Suppression d'une affaire selon son id")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Integer productId) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable Integer productId, Authentication authentication) {
+        utilisateurService.hasAdminPrivileve(authentication);
         productService.deleteProduct(productId);
         return ResponseEntity.noContent().build();
     }
-
 
 
 }
