@@ -54,6 +54,7 @@ export class ContactFormComponent implements OnInit {
       email: this.formGroupContact.controls.email.value!,
       message: this.formGroupContact.controls.message.value!
     }).subscribe({
+      //TODO: verification de la validité de l'email
       next: () => {
         this._messageService.add({severity: 'success', detail: `Demande de contact envoyée avec succès`});
         this.formGroupContact.reset();
