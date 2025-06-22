@@ -1,0 +1,18 @@
+<h1>{{ 'Contact' }}</h1>
+
+<ng-container [formGroup]="formGroupContact">
+  <p-floatLabel>
+    <input type="email" id="email" pInputText formControlName="email">
+    <label for="email">Email</label>
+  </p-floatLabel>
+  <p-floatLabel>
+    <textarea pInputTextarea formControlName="message" id="message"></textarea>
+    <label for="message">Message</label>
+  </p-floatLabel>
+
+  <p-button
+    icon="pi pi-send"
+    label="Envoyer"
+    (onClick)="onSend()"
+  ></p-button>
+</ng-container>

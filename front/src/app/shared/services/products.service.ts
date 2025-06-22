@@ -1,5 +1,5 @@
 import { Injectable, inject, signal } from "@angular/core";
-import { Product } from "./product.model";
+import { Product } from "../../products/data-access/product.model";
 import { HttpClient } from "@angular/common/http";
 import { catchError, Observable, of, tap } from "rxjs";
 
@@ -9,7 +9,7 @@ import { catchError, Observable, of, tap } from "rxjs";
 
     private readonly http = inject(HttpClient);
     private readonly path = "/api/products";
-    
+
     private readonly _products = signal<Product[]>([]);
 
     public readonly products = this._products.asReadonly();

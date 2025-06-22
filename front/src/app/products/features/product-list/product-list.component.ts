@@ -1,6 +1,6 @@
 import {Component, inject, OnInit, signal} from "@angular/core";
 import {Product} from "app/products/data-access/product.model";
-import {ProductsService} from "app/products/data-access/products.service";
+import {ProductsService} from "app/shared/services/products.service";
 import {ProductFormComponent} from "app/products/ui/product-form/product-form.component";
 import {ButtonModule} from "primeng/button";
 import {CardModule} from "primeng/card";
@@ -38,13 +38,13 @@ const emptyProduct: Product = {
   imports: [DataViewModule, CardModule, ButtonModule, DialogModule, ProductFormComponent, NgClass, RatingModule, FormsModule, CurrencyPipe],
 })
 export class ProductListComponent implements OnInit {
-  private readonly productsService = inject(ProductsService);
+  private readonly _productsService = inject(ProductsService);
   private readonly _cartService = inject(CartService);
-  private readonly messageService = inject(MessageService);
+  private readonly _messageService = inject(MessageService);
 
   protected readonly EnumInventoryStatus = EnumInventoryStatus;
 
-  public readonly products = this.productsService.products;
+  public readonly products = this._productsService.products;
   public readonly cart = this._cartService.cart;
 
   public isDialogVisible = false;
@@ -56,7 +56,7 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.productsService.get().subscribe();
+    this._productsService.get().subscribe();
   }
 
   public onCreate() {
@@ -72,14 +72,14 @@ export class ProductListComponent implements OnInit {
   }
 
   public onDelete(product: Product) {
-    this.productsService.delete(product.id).subscribe();
+    this._productsService.delete(product.id).subscribe();
   }
 
   public onSave(product: Product) {
     if (this.isCreation) {
-      this.productsService.create(product).subscribe();
+      this._productsService.create(product).subscribe();
     } else {
-      this.productsService.update(product).subscribe();
+      this._productsService.update(product).subscribe();
     }
     this.closeDialog();
   }
@@ -94,6 +94,6 @@ export class ProductListComponent implements OnInit {
 
   public addToCart(product: Product) {
     this._cartService.addToCart(product);
-    this.messageService.add({severity: 'success', detail: `${product.name} a été ajouté au panier`});
+    this._messageService.add({severity: 'success', detail: `${product.name} a été ajouté au panier`});
   }
 }
