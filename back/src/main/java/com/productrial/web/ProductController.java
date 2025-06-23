@@ -42,7 +42,7 @@ public class ProductController extends ExceptionController {
     public ResponseEntity<Void> createProduct(@RequestBody ProductDTO productDTO, HttpServletRequest request, Authentication authentication)
             throws URISyntaxException {
         //TODO: make create and edit dtos ?
-        utilisateurService.hasAdminPrivileve(authentication);
+        utilisateurService.hasAdminPrivilege(authentication);
         Integer idCreated = productService.createOrUpdateProduct(null, productDTO);
         return ResponseEntity.created(new URI(request.getRequestURI() + "/" + idCreated)).build();
     }
@@ -52,7 +52,7 @@ public class ProductController extends ExceptionController {
     public ResponseEntity<Void> updateProduct(@PathVariable Integer productId,
                                               @RequestBody ProductDTO productDTO,
                                               Authentication authentication) {
-        utilisateurService.hasAdminPrivileve(authentication);
+        utilisateurService.hasAdminPrivilege(authentication);
         productService.createOrUpdateProduct(productId, productDTO);
         return ResponseEntity.noContent().build();
     }
@@ -60,7 +60,7 @@ public class ProductController extends ExceptionController {
     @DeleteMapping(value = "/products/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Suppression d'une affaire selon son id")
     public ResponseEntity<Void> deleteProduct(@PathVariable Integer productId, Authentication authentication) {
-        utilisateurService.hasAdminPrivileve(authentication);
+        utilisateurService.hasAdminPrivilege(authentication);
         productService.deleteProduct(productId);
         return ResponseEntity.noContent().build();
     }

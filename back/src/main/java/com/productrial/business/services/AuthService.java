@@ -23,11 +23,11 @@ public class AuthService {
      * @param authenticationDTO
      */
     public void register(AuthenticationDTO authenticationDTO) {
-        //Vérifier si l'utilisateur existe
-        if (!utilisateurRepository.findByEmail(authenticationDTO.getEmail()).isPresent()) {
+        //Vérifier si l'utilisateur existe déjà
+        if (utilisateurRepository.findByEmail(authenticationDTO.getEmail()).isPresent()) {
             throw new RuntimeException(MessageExceptions.EMAIL_EXISTANT_MSG);
         }
-        if (!utilisateurRepository.findByUsername(authenticationDTO.getUsername()).isPresent()) {
+        if (utilisateurRepository.findByUsername(authenticationDTO.getUsername()).isPresent()) {
             throw new RuntimeException(MessageExceptions.USERNAME_EXISTANT_MSG);
         }
 

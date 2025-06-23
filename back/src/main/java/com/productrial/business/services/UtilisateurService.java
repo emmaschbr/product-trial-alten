@@ -14,7 +14,7 @@ public class UtilisateurService {
      * Vérifie si le user a les droits d'admin
      * @param authentication
      */
-    public void hasAdminPrivileve(Authentication authentication) {
+    public void hasAdminPrivilege(Authentication authentication) {
         String  userEmail = authentication.getDeclaringClass().getName();
         if (!"admin@admin.com".equals(userEmail)) {
             throw new RuntimeException(MessageExceptions.USER_NON_ADMIN);
